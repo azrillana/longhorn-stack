@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  labels:
+    app: nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "0.25"
+        ports:
+        - containerPort: 80
+          name: http-server
+        volumeMounts:
+          - mountPath: /usr/share/nginx/html
+            name: nginx-data
+      volumes:
+        - name: nginx-data
+          persistentVolumeClaim:
+            claimName: nginx-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+  labels:
+    app: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - port: 8080
+    targetPort: 80
+    name: http-server
