@@ -1,5 +1,9 @@
 # Setup Longhorn on Kubernetes with Kubectl
 
+Prerequisite : 
+
+Before deploy longhorn to kubernetes, must ensure that **open-iscsi** & **nfsv4 client** has been installed on each worker node
+
 To install longhorn on kubernetes, follow these steps:
 
 1. Change this parameter and adjust to your nodes count on longhorn/deploy.yaml file:
