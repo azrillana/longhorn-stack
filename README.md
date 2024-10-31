@@ -1,4 +1,4 @@
-# Setup Longhorn on Kubernetes with Kubectl
+# Setup Longhorn on Kubernetes
 
 Prerequisite : 
 
